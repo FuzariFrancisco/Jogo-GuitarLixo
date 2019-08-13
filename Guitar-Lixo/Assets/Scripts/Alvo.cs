@@ -14,56 +14,62 @@ public class Alvo : MonoBehaviour
     bool activePlastico = false;
     bool activeVidro = false;
 
-    public GameObject Metal;
-    public GameObject Papel;
-    public GameObject Plastico;
-    public GameObject Vidro;
+    GameObject Metal;
+    GameObject Papel;
+    GameObject Plastico;
+    GameObject Vidro;
+
+    public GameController controlador;
 
     void Update()
     {
         if (Input.GetKeyDown(keyMetal) && activeMetal)
         {
             Destroy(Metal);
+            controlador.Pontuou();
         }
 
         if (Input.GetKeyDown(keyPapel) && activePapel)
         {
             Destroy(Papel);
+            controlador.Pontuou();
         }
 
         if (Input.GetKeyDown(keyPlastico) && activePlastico)
         {
             Destroy(Plastico);
+            controlador.Pontuou();
         }
 
         if (Input.GetKeyDown(keyVidro) && activeVidro)
         {
             Destroy(Vidro);
+            controlador.Pontuou();
         }
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == Metal)
+        if (collision.gameObject.tag == "Metal")
         {
             activeMetal = true;
             Metal = collision.gameObject;
         }
 
-        if (collision.gameObject == Papel)
+        if (collision.gameObject.tag == "Papel")
         {
             activePapel = true;
             Papel = collision.gameObject;
         }
 
-        if (collision.gameObject == Plastico)
+        if (collision.gameObject.tag == "Plastico")
         {
             activePlastico = true;
             Plastico = collision.gameObject;
         }
 
-        if (collision.gameObject == Vidro)
+        if (collision.gameObject.tag == "Vidro")
         {
             activeVidro = true;
             Vidro = collision.gameObject;
