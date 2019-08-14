@@ -8,7 +8,7 @@ public class GeradorDeObjetos : MonoBehaviour
     public GameObject Plastico;
     public GameObject Vidro;
     public GameObject Papel;
-    public float countdown = 5.0f;
+    public float countdown = 3.5f;
 
     void Update()
     {

@@ -7,6 +7,10 @@ public class GameController : MonoBehaviour
 {
     public Text tempo;
     public Text pontos;
+    public Text final;
+    public GameObject panel;
+    public AudioSource erro;
+    public AudioSource ponto;
 
     public float timer = 60;
 
@@ -16,29 +20,39 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        tempo.text = "Tempo: 00:00";
-        pontos.text = "Pontos: 0";
+        tempo.text = "TEMPO: 00:00";
+        pontos.text = "PONTOS: 0";
+        timer = 60;
+        pontosGame = 0;
+        panel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     void Update()
     {
-        pontos.text = "Pontos: " + pontosGame.ToString();
+        pontos.text = "PONTOS: " + (pontosGame * 10).ToString();
         if (isRunning)
         {
             timer -= Time.deltaTime;
-            tempo.text = "Tempo: " + Mathf.RoundToInt(timer).ToString() + " s";
+            tempo.text = "TEMPO: " + Mathf.RoundToInt(timer).ToString() + " S";
 
             if (timer <= 0){
                 isRunning = false;
+                Time.timeScale = 0;
+                panel.SetActive(true);
+                final.text = "SUA PONTUAÇÃO FINAL FOI: " + (pontosGame * 10).ToString();
             }
         }
     }
 
     public void Pontuou(){
         pontosGame++;
+        ponto.Play();
     }
 
     public void Errou(){
-
+        erro.Play();
     }
+
+
 }
